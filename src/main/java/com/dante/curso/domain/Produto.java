@@ -9,10 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Produto implements Serializable {
@@ -32,6 +36,9 @@ public class Produto implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "categoria_id")
     )
     private List<Categoria> categorias = new ArrayList<>();
+
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itemsPedido = new HashSet<>();
 
     public Produto() {
     }
@@ -72,6 +79,18 @@ public class Produto implements Serializable {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public Set<ItemPedido> getItemsPedido() {
+        return itemsPedido;
+    }
+
+    public void setItemsPedido(Set<ItemPedido> itemsPedido) {
+        this.itemsPedido = itemsPedido;
+    }
+
+    public List<Pedido> getPedidos() {
+        return this.itemsPedido.stream().map(ItemPedido::getPedido).collect(Collectors.toList());
     }
 
     @Override

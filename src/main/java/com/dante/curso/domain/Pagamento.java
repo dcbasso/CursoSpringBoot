@@ -3,6 +3,8 @@ package com.dante.curso.domain;
 import com.dante.curso.domain.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -19,6 +21,7 @@ public abstract class Pagamento implements Serializable {
     @Id
     private Integer id;
 
+    @Enumerated(EnumType.STRING)
     private EstadoPagamento estadoPagamento;
 
     @OneToOne

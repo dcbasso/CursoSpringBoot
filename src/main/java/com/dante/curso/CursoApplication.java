@@ -5,6 +5,7 @@ import com.dante.curso.domain.Cidade;
 import com.dante.curso.domain.Cliente;
 import com.dante.curso.domain.Endereco;
 import com.dante.curso.domain.Estado;
+import com.dante.curso.domain.ItemPedido;
 import com.dante.curso.domain.Pagamento;
 import com.dante.curso.domain.PagamentoBoleto;
 import com.dante.curso.domain.PagamentoCartao;
@@ -17,6 +18,7 @@ import com.dante.curso.repositories.CidadeRepository;
 import com.dante.curso.repositories.ClienteRepository;
 import com.dante.curso.repositories.EnderecoRepository;
 import com.dante.curso.repositories.EstadoRepository;
+import com.dante.curso.repositories.ItemPedidoRepository;
 import com.dante.curso.repositories.PagamentoRepository;
 import com.dante.curso.repositories.PedidoRepository;
 import com.dante.curso.repositories.ProdutoRepository;
@@ -59,6 +61,9 @@ public class CursoApplication implements CommandLineRunner {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
 		final Categoria categoriaOne = new Categoria(null, "Informática");
@@ -86,6 +91,17 @@ public class CursoApplication implements CommandLineRunner {
 		final Pagamento pagamentoOne = new PagamentoCartao(null, EstadoPagamento.QUITADO, pedidoOne, 6);
 		final Pagamento pagamentoTwo = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, pedidoTwo, sdf.parse("20/10/2020 00:00"), null);
 
+		final ItemPedido itemPedidoOne = new ItemPedido(pedidoOne, produtoOne, 0.00, 1, 2000.00);
+		final ItemPedido itemPedidoTwo = new ItemPedido(pedidoOne, produtoThree, 0.00, 2, 80.00);
+		final ItemPedido itemPedidoThree = new ItemPedido(pedidoTwo, produtoTwo, 100.00, 1, 800.00);
+
+		pedidoOne.getItemsPedido().addAll(Arrays.asList(itemPedidoOne, itemPedidoTwo));
+		pedidoTwo.getItemsPedido().addAll(Arrays.asList(itemPedidoThree));
+
+		produtoOne.getItemsPedido().addAll(Arrays.asList(itemPedidoOne));
+		produtoTwo.getItemsPedido().addAll(Arrays.asList(itemPedidoThree));
+		produtoThree.getItemsPedido().addAll(Arrays.asList(itemPedidoTwo));
+
 		pedidoOne.setPagamento(pagamentoOne);
 		pedidoTwo.setPagamento(pagamentoTwo);
 		clienteOne.getPedidos().addAll(Arrays.asList(pedidoOne, pedidoTwo));
@@ -112,6 +128,7 @@ public class CursoApplication implements CommandLineRunner {
 
 		pedidoRepository.saveAll(Arrays.asList(pedidoOne, pedidoTwo));
 		pagamentoRepository.saveAll(Arrays.asList(pagamentoOne, pagamentoTwo));
+		itemPedidoRepository.saveAll(Arrays.asList(itemPedidoOne, itemPedidoTwo, itemPedidoThree));
 	}
 
 }

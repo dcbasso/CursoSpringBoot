@@ -7,10 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Pedido implements Serializable {
@@ -31,6 +34,9 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "endereco_entrega_id")
     private Endereco enderecoEntrega;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itemsPedido = new HashSet<>();
 
     public Pedido() {
     }
@@ -80,6 +86,14 @@ public class Pedido implements Serializable {
 
     public void setEnderecoEntrega(Endereco enderecoEntrega) {
         this.enderecoEntrega = enderecoEntrega;
+    }
+
+    public Set<ItemPedido> getItemsPedido() {
+        return itemsPedido;
+    }
+
+    public void setItemsPedido(Set<ItemPedido> itemsPedido) {
+        this.itemsPedido = itemsPedido;
     }
 
     @Override

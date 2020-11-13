@@ -4,7 +4,11 @@ Course from Udemy
 
 See: https://www.udemy.com/course/spring-boot-ionic/
 
-# About:
+# Important
+
+I'm not follow the very same code example of course.
+
+# Technologies:
 
 - Gradle
 - Java (11)

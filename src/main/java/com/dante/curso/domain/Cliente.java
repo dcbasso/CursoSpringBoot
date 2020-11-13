@@ -1,7 +1,7 @@
 package com.dante.curso.domain;
 
 import com.dante.curso.domain.enums.TipoCliente;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -35,7 +35,6 @@ public class Cliente implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoCliente tipoCliente;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
@@ -43,7 +42,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 

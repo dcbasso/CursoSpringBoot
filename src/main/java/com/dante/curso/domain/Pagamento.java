@@ -1,6 +1,7 @@
 package com.dante.curso.domain;
 
 import com.dante.curso.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -24,6 +25,7 @@ public abstract class Pagamento implements Serializable {
     @Enumerated(EnumType.STRING)
     private EstadoPagamento estadoPagamento;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId

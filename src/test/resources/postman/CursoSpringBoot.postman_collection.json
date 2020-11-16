@@ -27,6 +27,34 @@
 						"description": "localhost:8080/categorias/1"
 					},
 					"response": []
+				},
+				{
+					"name": "POST: insert categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\" : \"Cama, mesa e banho\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/categorias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias"
+							]
+						},
+						"description": "localhost:8080/categorias"
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -51,6 +79,51 @@
 							]
 						},
 						"description": "localhost:8080/clientes/1"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "pedido",
+			"item": [
+				{
+					"name": "GET: Pedido by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pedidos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Pedido by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pedidos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedidos",
+								"1"
+							]
+						},
+						"description": "localhost:8080/pedidos/1"
 					},
 					"response": []
 				}

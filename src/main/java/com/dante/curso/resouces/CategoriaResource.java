@@ -1,6 +1,7 @@
 package com.dante.curso.resouces;
 
 import com.dante.curso.domain.Categoria;
+import com.dante.curso.dto.CategoriaDTO;
 import com.dante.curso.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/categorias")
@@ -22,6 +25,13 @@ public class CategoriaResource {
     @Autowired
     public CategoriaResource(final CategoriaService categoriaService) {
         this.categoriaService = categoriaService;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        final List<Categoria> categoriaList = this.categoriaService.findAll();
+        final List<CategoriaDTO> categoriaDTOS = categoriaList.stream().map(cat -> new CategoriaDTO(cat)).collect(Collectors.toList());
+        return ResponseEntity.ok(categoriaDTOS);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
@@ -41,9 +51,15 @@ public class CategoriaResource {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value= "/{id}")
-    public ResponseEntity<Void> update(@PathVariable final Integer id, @RequestBody Categoria categoria) {
+    public ResponseEntity<Void> update(@PathVariable final Integer id, @RequestBody final Categoria categoria) {
         categoria.setId(id);
-        categoria = this.categoriaService.update(categoria);
+        this.categoriaService.update(categoria);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable final Integer id) {
+        this.categoriaService.delete(id);
         return ResponseEntity.noContent().build();
     }
 

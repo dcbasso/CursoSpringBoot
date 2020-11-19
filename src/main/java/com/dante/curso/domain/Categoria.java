@@ -1,10 +1,13 @@
 package com.dante.curso.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,8 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty(message="Field is required")
+    @Length(min = 5, max =80, message="Field should have size 5 to 80 chars")
     private String nome;
 
     @ManyToMany(mappedBy = "categorias")

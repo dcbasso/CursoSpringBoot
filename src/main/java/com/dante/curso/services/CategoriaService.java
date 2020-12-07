@@ -36,13 +36,15 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
+
     public Categoria insert(final Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
 
     public Categoria update(final Categoria categoria) {
-        this.find(categoria.getId());
-        return this.categoriaRepository.save(categoria);
+        final Categoria toUpdateCliente = this.find(categoria.getId());
+        updateData(toUpdateCliente, categoria);
+        return this.categoriaRepository.save(toUpdateCliente);
     }
 
     public void delete(final Integer id) {
@@ -61,6 +63,10 @@ public class CategoriaService {
 
     public Categoria fromDTO(final CategoriaDTO categoriaDTO) {
         return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
+    }
+
+    private void updateData(final Categoria toUpdateCategoria, final Categoria oldCategoria) {
+        toUpdateCategoria.setNome(oldCategoria.getNome());
     }
 
 }

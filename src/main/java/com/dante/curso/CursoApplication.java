@@ -66,6 +66,7 @@ public class CursoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
 		final Categoria categoriaOne = new Categoria(null, "Informática");
 		final Categoria categoriaTwo = new Categoria(null, "Escritório");
 

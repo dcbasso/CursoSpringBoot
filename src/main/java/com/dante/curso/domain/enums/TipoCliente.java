@@ -15,6 +15,15 @@ public enum TipoCliente {
         this.descricao = descricao;
     }
 
+    public static TipoCliente fromString(String text) {
+        for (TipoCliente tipo : TipoCliente.values()) {
+            if (tipo.getDescricao().equalsIgnoreCase(text)) {
+                return tipo;
+            }
+        }
+        return null;
+    }
+
     public static TipoCliente toEnum(final Integer codigo) {
         if (codigo == null) {
             return null;

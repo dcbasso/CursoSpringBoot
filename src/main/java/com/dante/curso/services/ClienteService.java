@@ -1,7 +1,10 @@
 package com.dante.curso.services;
 
+import com.dante.curso.domain.Cidade;
 import com.dante.curso.domain.Cliente;
+import com.dante.curso.domain.Endereco;
 import com.dante.curso.dto.ClienteDTO;
+import com.dante.curso.dto.ClienteNewDTO;
 import com.dante.curso.exceptions.DataIntegrityException;
 import com.dante.curso.exceptions.ObjectNotFoundException;
 import com.dante.curso.repositories.ClienteRepository;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +44,7 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    @Transactional
     public Cliente insert(Cliente cliente) {
         cliente.setId(null);
         cliente = clienteRepository.save(cliente);
@@ -69,6 +74,23 @@ public class ClienteService {
 
     public Cliente fromDTO(final ClienteDTO clienteDTO) {
         return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getEmail(), null, null);
+    }
+
+    public Cliente fromDTO(final ClienteNewDTO clienteNewDTO) {
+        final Cidade cidade = new Cidade(clienteNewDTO.getCidadeId(), null, null);
+        final Cliente cliente = new Cliente(null, clienteNewDTO.getNome(), clienteNewDTO.getEmail(), clienteNewDTO.getCpfCNPJ(), clienteNewDTO.getTipoCliente());
+        final Endereco endereco = new Endereco(null, clienteNewDTO.getLogradouro(), clienteNewDTO.getNumero(), clienteNewDTO.getComplemento(),
+                clienteNewDTO.getBairro(), clienteNewDTO.getCep(), cliente, cidade);
+        cliente.getEnderecos().add(endereco);
+        cliente.getTelefones().add(clienteNewDTO.getTelefone1());
+        if (clienteNewDTO.getTelefone2() != null) {
+            cliente.getTelefones().add(clienteNewDTO.getTelefone2());
+        }
+        if (clienteNewDTO.getTelefone3() != null) {
+            cliente.getTelefones().add(clienteNewDTO.getTelefone3());
+        }
+
+        return cliente;
     }
 
     private void updateData(final Cliente toUpdateCliente, final Cliente newCliente) {

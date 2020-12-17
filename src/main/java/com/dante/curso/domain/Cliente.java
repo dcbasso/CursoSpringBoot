@@ -3,7 +3,9 @@ package com.dante.curso.domain;
 import com.dante.curso.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,6 +30,7 @@ public class Cliente implements Serializable {
 
     private String nome;
 
+    @Column(unique = true)
     private String email;
 
     private String cpfCNPJ;
@@ -35,7 +38,7 @@ public class Cliente implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoCliente tipoCliente;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection

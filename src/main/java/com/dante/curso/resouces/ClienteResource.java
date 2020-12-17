@@ -2,6 +2,7 @@ package com.dante.curso.resouces;
 
 import com.dante.curso.domain.Cliente;
 import com.dante.curso.dto.ClienteDTO;
+import com.dante.curso.dto.ClienteNewDTO;
 import com.dante.curso.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,8 +45,8 @@ public class ClienteResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO categoriaDTO) {
-        Cliente cliente =  this.clienteService.fromDTO(categoriaDTO);
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO clienteNewDTO) {
+        Cliente cliente =  this.clienteService.fromDTO(clienteNewDTO);
         cliente = this.clienteService.insert(cliente);
         final URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()

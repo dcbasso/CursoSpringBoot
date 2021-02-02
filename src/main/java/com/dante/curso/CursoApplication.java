@@ -67,12 +67,25 @@ public class CursoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		final Categoria categoriaOne = new Categoria(null, "Informática");
-		final Categoria categoriaTwo = new Categoria(null, "Escritório");
+		final Categoria categoria1 = new Categoria(null, "Informática");
+		final Categoria categoria2 = new Categoria(null, "Escritório");
+		final Categoria categoria3 = new Categoria(null, "Cama Mesa e Banho");
+		final Categoria categoria4 = new Categoria(null, "Eletronicos");
+		final Categoria categoria5 = new Categoria(null, "Jardinagem");
+		final Categoria categoria6 = new Categoria(null, "Decor");
+		final Categoria categoria7 = new Categoria(null, "Perfumaria");
 
-		final Produto produtoOne = new Produto(null, "Computador", 2000.00);
-		final Produto produtoTwo = new Produto(null, "Impressora", 800.00);
-		final Produto produtoThree = new Produto(null, "Mouse", 80.00);
+		final Produto produto1 = new Produto(null, "Computador", 2000.00);
+		final Produto produto2 = new Produto(null, "Impressora", 800.00);
+		final Produto produto3 = new Produto(null, "Mouse", 80.00);
+		final Produto produto4 = new Produto(null, "Mesa de Escritorio", 300.00);
+		final Produto produto5 = new Produto(null, "Toalha", 50.00);
+		final Produto produto6 = new Produto(null, "Colcha", 200.00);
+		final Produto produto7 = new Produto(null, "Tv True Color", 1200.00);
+		final Produto produto8 = new Produto(null, "Rocadeira", 800.00);
+		final Produto produto9 = new Produto(null, "Abajour", 100.00);
+		final Produto produto10 = new Produto(null, "Pendente", 180.00);
+		final Produto produto11 = new Produto(null, "Shampoo", 90.00);
 
 		final Estado estadoOne = new Estado(null, "Minas Gerais");
 		final Estado estadoTwo = new Estado(null, "São Paulo");
@@ -92,16 +105,16 @@ public class CursoApplication implements CommandLineRunner {
 		final Pagamento pagamentoOne = new PagamentoCartao(null, EstadoPagamento.QUITADO, pedidoOne, 6);
 		final Pagamento pagamentoTwo = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, pedidoTwo, sdf.parse("20/10/2020 00:00"), null);
 
-		final ItemPedido itemPedidoOne = new ItemPedido(pedidoOne, produtoOne, 0.00, 1, 2000.00);
-		final ItemPedido itemPedidoTwo = new ItemPedido(pedidoOne, produtoThree, 0.00, 2, 80.00);
-		final ItemPedido itemPedidoThree = new ItemPedido(pedidoTwo, produtoTwo, 100.00, 1, 800.00);
+		final ItemPedido itemPedidoOne = new ItemPedido(pedidoOne, produto1, 0.00, 1, 2000.00);
+		final ItemPedido itemPedidoTwo = new ItemPedido(pedidoOne, produto3, 0.00, 2, 80.00);
+		final ItemPedido itemPedidoThree = new ItemPedido(pedidoTwo, produto2, 100.00, 1, 800.00);
 
 		pedidoOne.getItemsPedido().addAll(Arrays.asList(itemPedidoOne, itemPedidoTwo));
 		pedidoTwo.getItemsPedido().addAll(Arrays.asList(itemPedidoThree));
 
-		produtoOne.getItemsPedido().addAll(Arrays.asList(itemPedidoOne));
-		produtoTwo.getItemsPedido().addAll(Arrays.asList(itemPedidoThree));
-		produtoThree.getItemsPedido().addAll(Arrays.asList(itemPedidoTwo));
+		produto1.getItemsPedido().addAll(Arrays.asList(itemPedidoOne));
+		produto2.getItemsPedido().addAll(Arrays.asList(itemPedidoThree));
+		produto3.getItemsPedido().addAll(Arrays.asList(itemPedidoTwo));
 
 		pedidoOne.setPagamento(pagamentoOne);
 		pedidoTwo.setPagamento(pagamentoTwo);
@@ -113,15 +126,28 @@ public class CursoApplication implements CommandLineRunner {
 		estadoOne.setCidades(Arrays.asList(cidadeOne));
 		estadoTwo.setCidades(Arrays.asList(cidadeTwo, cidadeThree));
 
-		categoriaOne.getProdutos().addAll(Arrays.asList(produtoOne, produtoTwo, produtoThree));
-		categoriaTwo.getProdutos().addAll(Arrays.asList(produtoTwo));
+		categoria1.getProdutos().addAll(Arrays.asList(produto1, produto2, produto3));
+		categoria2.getProdutos().addAll(Arrays.asList(produto2, produto4));
+		categoria3.getProdutos().addAll(Arrays.asList(produto5, produto6));
+		categoria4.getProdutos().addAll(Arrays.asList(produto1, produto2, produto3, produto7));
+		categoria5.getProdutos().addAll(Arrays.asList(produto8));
+		categoria6.getProdutos().addAll(Arrays.asList(produto9, produto10));
+		categoria7.getProdutos().addAll(Arrays.asList(produto11));
 
-		produtoOne.getCategorias().addAll(Arrays.asList(categoriaOne));
-		produtoTwo.getCategorias().addAll(Arrays.asList(categoriaOne, categoriaTwo));
-		produtoThree.getCategorias().addAll(Arrays.asList(categoriaOne));
+		produto1.getCategorias().addAll(Arrays.asList(categoria1, categoria4));
+		produto2.getCategorias().addAll(Arrays.asList(categoria1, categoria2, categoria4));
+		produto3.getCategorias().addAll(Arrays.asList(categoria1, categoria4));
+		produto4.getCategorias().addAll(Arrays.asList(categoria2));
+		produto5.getCategorias().addAll(Arrays.asList(categoria3));
+		produto6.getCategorias().addAll(Arrays.asList(categoria3));
+		produto7.getCategorias().addAll(Arrays.asList(categoria4));
+		produto8.getCategorias().addAll(Arrays.asList(categoria5));
+		produto9.getCategorias().addAll(Arrays.asList(categoria6));
+		produto10.getCategorias().addAll(Arrays.asList(categoria6));
+		produto11.getCategorias().addAll(Arrays.asList(categoria7));
 
-		categoriaRepository.saveAll(Arrays.asList(categoriaOne, categoriaTwo));
-		produtoRepository.saveAll(Arrays.asList(produtoOne, produtoTwo, produtoThree));
+		categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4, categoria5, categoria6, categoria7));
+		produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3, produto4, produto5, produto6, produto7, produto8, produto9, produto10, produto11));
 		estadoRepository.saveAll(Arrays.asList(estadoOne, estadoTwo));
 		cidadeRepository.saveAll(Arrays.asList(cidadeOne, cidadeTwo, cidadeThree));
 		clienteRepository.save(clienteOne);

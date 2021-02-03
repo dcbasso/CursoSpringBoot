@@ -112,4 +112,8 @@ public class Pedido implements Serializable {
         return Objects.hash(id);
     }
 
+    public Double getValorTotal() {
+        return this.getItemsPedido().stream().mapToDouble(ItemPedido::getSubtotal).sum();
+    }
+
 }

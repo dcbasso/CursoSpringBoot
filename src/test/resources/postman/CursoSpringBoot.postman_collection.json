@@ -55,13 +55,90 @@
 						"description": "localhost:8080/categorias"
 					},
 					"response": []
+				},
+				{
+					"name": "DELETE: categoria by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categorias/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias",
+								"3"
+							]
+						},
+						"description": "localhost:8080/categorias/3"
+					},
+					"response": []
+				},
+				{
+					"name": "GET: List all categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categorias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias"
+							]
+						},
+						"description": "localhost:8080/categorias"
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Paged Categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categorias/paged",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias",
+								"paged"
+							]
+						},
+						"description": "localhost:8080/categorias/paged"
+					},
+					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "cliente",
 			"item": [
+				{
+					"name": "GET: Lista Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clientes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes"
+							]
+						},
+						"description": "localhost:8080/clientes"
+					},
+					"response": []
+				},
 				{
 					"name": "GET: find cliente by ID",
 					"request": {
@@ -81,9 +158,35 @@
 						"description": "localhost:8080/clientes/1"
 					},
 					"response": []
+				},
+				{
+					"name": "POST: Insert cliente with success",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João da Silva\",\n    \"email\": \"jsilva@gmail.com\",\n    \"tipoCliente\" : \"PESSOA_FISICA\",\n    \"telefone1\" : \"991445687\",\n    \"cpfCNPJ\" : \"33511605008\",\n    \"logradouro\" : \"rua da arvores\",\n    \"complemento\" : \"Apt 302\",\n    \"cep\" : \"38466837\",\n    \"numero\" : \"102\",\n    \"cidadeId\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/clientes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "pedido",
@@ -127,9 +230,85 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
+		},
+		{
+			"name": "produtos",
+			"item": [
+				{
+					"name": "GET: Listagem com Filtro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/produtos?nome=or&categorias=1,4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produtos"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "or"
+								},
+								{
+									"key": "categorias",
+									"value": "1,4"
+								}
+							]
+						},
+						"description": "localhost:8080/produtos?nome=or&categorias=1,4"
+					},
+					"response": []
+				},
+				{
+					"name": "GET: Listagem (BUG)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/produtos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produtos"
+							]
+						},
+						"description": "localhost:8080/produtos"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "GET: Find Pedido By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pedidos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedidos",
+								"1"
+							]
+						},
+						"description": "localhost:8080/pedidos/1"
+					},
+					"response": []
+				}
+			]
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
